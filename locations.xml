@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<isos>
+  <iso name="ubuntu" location="http://releases.ubuntu.com/18.04.1/ubuntu-18.04.1-desktop-amd64.iso" type=".iso"/>
+  <iso name="kali" location="http://cdimage.kali.org/kali-2018.3a/kali-linux-2018.3a-amd64.iso" type=".iso"/>
+  <iso name="test" location="https://i.imgur.com/kFFwbiM.jpg" type=".jpg"/>
+  <iso name="lubuntu" location="http://cdimage.ubuntu.com/lubuntu/releases/18.04/release/lubuntu-18.04-desktop-i386.iso" type=".iso"/>
+</isos>

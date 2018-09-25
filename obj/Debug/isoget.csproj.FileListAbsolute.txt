@@ -1,0 +1,7 @@
+C:\Users\Michael Rajchert\source\repos\isoget\isoget\bin\Debug\isoget.exe.config
+C:\Users\Michael Rajchert\source\repos\isoget\isoget\bin\Debug\isoget.exe
+C:\Users\Michael Rajchert\source\repos\isoget\isoget\bin\Debug\isoget.pdb
+C:\Users\Michael Rajchert\source\repos\isoget\isoget\obj\Debug\isoget.csprojAssemblyReference.cache
+C:\Users\Michael Rajchert\source\repos\isoget\isoget\obj\Debug\isoget.csproj.CoreCompileInputs.cache
+C:\Users\Michael Rajchert\source\repos\isoget\isoget\obj\Debug\isoget.exe
+C:\Users\Michael Rajchert\source\repos\isoget\isoget\obj\Debug\isoget.pdb
