@@ -16,6 +16,7 @@ namespace isoget
             downloadDir = "C:";
         static void Main(string[] args)
         {
+            Console.WriteLine();
             if (args.Contains("-d") || args.Contains("-D"))
             {
                 debug = true;
@@ -24,6 +25,13 @@ namespace isoget
                     "   RES: Program Resolution/Returned \n" +
                     "   ACT: Action \n");
             }
+
+            /* Possible Commands
+             *    -get
+             *    -add
+             *    -list
+             *    -query
+             */
 
             if (args.Contains("-get"))
             {
@@ -79,6 +87,88 @@ namespace isoget
                     Console.WriteLine("ERROR: " + e.Message);
                 }
             }
+            if (args.Contains("-help"))
+            {
+                if (debug == true)
+                {
+                    Console.WriteLine("DEBUG-ACT: Running -help");
+                }
+                try
+                {
+                    int helpArgIndex = Array.IndexOf(args, "-help")+1;
+                    switch (args[helpArgIndex])
+                    {
+                        case "get":
+                            Console.WriteLine("USAGE:\n" +
+                                ">isoget -get [imageName]         ... Downloads the disk image based off a given name using\n" +
+                                "                                     data that exists in the local database.\n\n" +
+                                "Additonal Info:\n" +
+                                "   This command uses the System Webclient, therefore, an internet connection is required to\n" +
+                                "   execute this command. If you have issues, ensuring that there is a valid internet\n" +
+                                "   connection is generally a good first step.\n" +
+                                "   If you are unsure on what disk images you can download, run >isoget -list.");
+                            break;
+                        case "add":
+                            Console.WriteLine("USAGE:\n" +
+                                ">isoget -add [imageName][URL][fileType]    ... Adds a new entry to the local database.\n\n" +
+                                "Additional Info:\n" +
+                                "   Please note, this ONLY updates the local database.\n" +
+                                "   All parts of the command must be fulfiled and valid otherwise when\n" +
+                                "   calling the new entry an error can occur. Please pay close attention\n" +
+                                "   to the URL ensuring this it is a download URL and not a webpage.");
+                            break;
+                        case "list":
+                            Console.WriteLine("USEAGE\n" +
+                                ">isoget -list          ... Lists existing info in the local database.");
+                            break;
+                        case "query":
+                            Console.WriteLine("USAGE:\n" +
+                                ">isoget -query [imageName][requestType]    ... Returns a value from the database based off a given disk image name.\n\n" +
+                                "Valid Request Types: name, location, type\n\n" +
+                                "Additional Info:\n" +
+                                "   imageName must be an existing item in the database. If you are unsure what exists\n" +
+                                "   in the database, use >isoget -list");
+                            break;
+                        case "d":
+                            Console.WriteLine("USAGE:\n" +
+                                ">isoget -d                 ... displays debug information\n\n" +
+                    "   REQ: Program Request \n" +
+                    "   RES: Program Resolution/Returned \n" +
+                    "   ACT: Action \n");
+                            break;
+                        default:
+                            defaultHelp();
+                            break;
+                    }
+                }
+                catch (Exception)
+                {
+                    defaultHelp();
+                }
+            }
+        }
+        static void defaultHelp()
+        {
+            Console.WriteLine("isoget by Michael Rajchert \n\n" +
+                    "USAGE: \n\n" +
+                    "   isoget [-get [imageName] |\n" +
+                    "           -add [imageName][URL][fileType] |\n" +
+                    "           -list |\n" +
+                    "           -help [command]| \n" +
+                    "           -query [imageName][requestType] ] \n" +
+                    "           -d\n\n" +
+                    "WHERE: \n" +
+                    "   -get    Downloads a new Disk Image from URL using given name \n" +
+                    "   -add    Adds new Disk Image information into the database \n" +
+                    "   -list   Lists existing information in the database \n" +
+                    "   -query  Returns information requested based off a given Disk Image Name \n" +
+                    "   -d      Debug\n" +
+                    "   -help   Lists this information again, or additional information based on a command\n\n" +
+                    "Examples:\n" +
+                    "   >isoget -get ubuntu                             ... Downloads ubuntu disk image\n" +
+                    "   >isoget -help list                              ... Gives more info on the list argument\n" +
+                    "   >isoget -add ubuntu downloadCDN.ubuntu.com .iso ... Adds ubuntu with a location to database\n" +
+                    "   >isoget -query ubuntu location                  ... Gets ubuntu's download URL");
         }
         static void listXMLData()
         {
