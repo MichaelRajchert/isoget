@@ -11,88 +11,74 @@ namespace isoget
 {
     class Program
     {
-        public static bool debug = true;
+        public static bool debug = false;
         public static String locationDir = "C:\\Users\\Michael Rajchert\\source\\repos\\isoget\\isoget\\locations.xml",
             downloadDir = "C:";
         static void Main(string[] args)
         {
-            if (debug == true)
+            if (args.Contains("-d") || args.Contains("-D"))
             {
+                debug = true;
                 Console.WriteLine("Debug is Enabled \n" +
                     "   REQ: Program Request \n" +
                     "   RES: Program Resolution/Returned \n" +
                     "   ACT: Action \n");
             }
-            Console.WriteLine("isogetr");
-            try {
-                switch (args[0])
-                {
-                    case "get":
-                        try
-                        {
-                            String URL = getXMLData(args[1].ToLower(), "location");
-                            String filename = args[1];
-                            String filetype = getXMLData(args[1].ToLower(), "type");
 
-                            download(URL, filename, filetype);
-                        }
-                        catch (System.IndexOutOfRangeException)
-                        {
-                            Console.WriteLine("ERROR: Missing Arguments.");
-                        }
-                        break;
-                    case "add":
-                        try
-                        {
-                            Console.WriteLine("add");
-                        }
-                        catch (System.IndexOutOfRangeException)
-                        {
-                            Console.WriteLine("ERROR: Missing Arguments.");
-                        }
-                        break;
-                    case "list":
-                        try
-                        {
-                            listXMLData();
-                        }
-                        catch (System.IndexOutOfRangeException)
-                        {
-                            Console.WriteLine("ERROR: Missing Arguments.");
-                        }
-                        break;
-                    case "query":
-                        try
-                        {
-                            String rN = args[1];
-                            String rT = args[2];
-                            Console.WriteLine(getXMLData(rN, rT));
-                        }
-                        catch (System.IndexOutOfRangeException)
-                        {
-                            Console.WriteLine("ERROR: Missing Arguments.");
-                        }
-                        break;
-                    case "man":
-                        try
-                        {
-                            Console.WriteLine("man");
-                        }
-                        catch (System.IndexOutOfRangeException)
-                        {
-                            Console.WriteLine("ERROR: Missing Arguments.");
-                        }
-                        break;
-                    default:
-                        Console.WriteLine("help");
-                        break;
+            if (args.Contains("-get"))
+            {
+                int argIndex = Array.IndexOf(args, "-get"),
+                    argCondition = argIndex + 1;
+                try
+                {
+                    String URL = getXMLData(args[argCondition].ToLower(), "location");
+                    String filename = args[argCondition];
+                    String filetype = getXMLData(args[argCondition].ToLower(), "type");
+
+                    download(URL, filename, filetype);
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine("ERROR: " + e.Message);
                 }
             }
-            catch (Exception)
+            if (args.Contains("-add"))
             {
-                Console.WriteLine("help");
+                int argIndex = Array.IndexOf(args, "-add"),
+                    argCondition = argIndex + 1;
+                try
+                {
+                    Console.WriteLine("add");
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine("ERROR: " + e.Message);
+                }
             }
-            Console.Read();
+            if (args.Contains("-list"))
+            {
+                try
+                {
+                    listXMLData();
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine("ERROR: " + e.Message);
+                }
+            }
+            if (args.Contains("-query"))
+            {
+                try
+                {
+                    String rN = args[1];
+                    String rT = args[2];
+                    Console.WriteLine(getXMLData(rN, rT));
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine("ERROR: " + e.Message);
+                }
+            }
         }
         static void listXMLData()
         {
